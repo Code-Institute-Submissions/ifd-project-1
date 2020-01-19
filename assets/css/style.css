@@ -1,3 +1,13 @@
+/* ---------------------------------- navbar ---------------------------------------------------- */
+.dropdown-item-checked::before {
+    position: absolute;
+    left: .4rem;
+    content: '✓';
+    font-weight: 600;
+}
+
+
+/* ---------------------------------- main container -------------------------------------------- */
 .main-container {
     background-color: #189ca1;
     height: 100vh;
@@ -13,6 +23,8 @@
     margin: auto;
 }
 
+
+/* ---------------------------------- score, lives and timer display ---------------------------- */
 .sign {
     color: #053b1e;
     padding-left: 30px;
@@ -33,11 +45,22 @@
     padding-left: 20px;
 }
 
-.buttons {
-    position: absolute;
-    bottom: 5%;
-    width: 100%;
+
+/* ---------------------------------- display for the numbers ----------------------------------- */
+.display-numbers {
+    font-size: 80px;
+    letter-spacing: 20px;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }
+
+.first-col {}
+
+.second-col {}
+
+
+/* ---------------------------------- interactive buttons --------------------------------------- */
+.buttons {}
 
 .btn-custom {
     background-color: forestgreen;
@@ -48,13 +71,8 @@
     margin: 5px;
 }
 
-.dropdown-item-checked::before {
-    position: absolute;
-    left: .4rem;
-    content: '✓';
-    font-weight: 600;
-}
 
+/* ---------------------------------- media query for responsive design ------------------------- */
 @media (max-width: 360px) {
     .main-heading {
         padding-top: 60px;
@@ -69,5 +87,12 @@
 
     .sign {
         font-size: 20px;
+    }
+
+    .display-numbers {
+        font-size: 30px;
+        letter-spacing: 10px;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
 }
