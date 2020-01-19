@@ -1,0 +1,73 @@
+.main-container {
+    background-color: #189ca1;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.main-heading {
+    color: #00047a;
+    padding-top: 100px;
+    padding-bottom: 60px;
+    margin: auto;
+}
+
+.sign {
+    color: #053b1e;
+    padding-left: 30px;
+}
+
+.score {
+    color: #000;
+    padding-left: 20px;
+}
+
+.lives {
+    color: #000;
+    padding-left: 20px;
+}
+
+.timer {
+    color: #000;
+    padding-left: 20px;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+}
+
+.btn-custom {
+    background-color: forestgreen;
+    font-weight: bold;
+    border: 1px solid #555;
+    font-size: 40px;
+    padding: 20px;
+    margin: 5px;
+}
+
+.dropdown-item-checked::before {
+    position: absolute;
+    left: .4rem;
+    content: '✓';
+    font-weight: 600;
+}
+
+@media (max-width: 360px) {
+    .main-heading {
+        padding-top: 60px;
+        padding-bottom: 20px;
+    }
+
+    .btn-custom {
+        font-size: 15px;
+        padding: 10px;
+        margin: 2px;
+    }
+
+    .sign {
+        font-size: 20px;
+    }
+}
