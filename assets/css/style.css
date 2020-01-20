@@ -54,9 +54,7 @@
     padding-bottom: 80px;
 }
 
-.first-col {}
-
-.second-col {}
+.display {}
 
 
 /* ---------------------------------- interactive buttons --------------------------------------- */
@@ -91,7 +89,7 @@
 
     .display-numbers {
         font-size: 30px;
-        letter-spacing: 10px;
+        letter-spacing: 5px;
         padding-top: 30px;
         padding-bottom: 30px;
     }
