@@ -69,6 +69,10 @@
     margin: 5px;
 }
 
+.buttons .disabled {
+    background-color: #555;
+}
+
 
 /* ---------------------------------- media query for responsive design ------------------------- */
 @media (max-width: 360px) {
