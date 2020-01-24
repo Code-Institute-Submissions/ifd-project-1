@@ -48,10 +48,10 @@
 
 /* ---------------------------------- display for the numbers ----------------------------------- */
 .display-numbers {
-    font-size: 80px;
+    font-size: 50px;
     letter-spacing: 20px;
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .display {}
