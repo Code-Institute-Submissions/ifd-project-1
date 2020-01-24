@@ -49,62 +49,96 @@ $(document).ready(function () {
         });
     }
 
-    // Function to show numbers to memorize and hide them after
-    async function showHideNumbers(string) {
-        $('.display').text(string).show();
-        var x = await wait2Seconds();
-        console.log('Numbers displayed for 2 seconds.');
-        $('.display').text('.');
-        $('.btn-custom').removeClass('disabled');
-        console.log('Repeat numbers:');
-    }
-
     // Feedback to console
     console.log('DOM is ready. Click on Start to play!');
 
     // Function to start the game
     $('#lnkStart').click(function () {
 
+        // Function to activate countdown timer
+        function countdown() {
+            tmr = setInterval(function () {
+                timer--;
+                updateDisplay(score, lives, timer);
+
+                if (timer > 0) {
+                    console.log('Timer: ' + timer);
+                } else {
+                    testStrings();
+                }
+            }, 1000);
+        }
+
+        // Function to show numbers to memorize and hide them after
+        async function showHideNumbers(string) {
+            $('.display').text(string).show();
+            var x = await wait2Seconds();
+            console.log('Numbers displayed for 2 seconds.');
+            $('.display').text('.');
+            $('.btn-custom').removeClass('disabled');
+            console.log('Repeat numbers:');
+            countdown();
+        }
+
+        // Function to check the number of lives
+        function checkLives() {
+            if (lives === 0) {
+                console.log('Game over!');
+                alert('Game over!\nYour final score is ' + score);
+                $('.score').text('');
+                $('.lives').text('');
+                $('.timer').text('');
+                $('#lnkStart').removeClass('disabled');
+                $('.dropdown-toggle').removeClass('disabled');
+                $('#lnkAbout').removeClass('disabled');
+                $('.display').text('.');
+                $('.btn-custom').off();
+            } else {
+                console.log('Round ' + (round + 1) + '.');
+                randomString = getRandomNumbers(round, difficulty);
+                updateDisplay(score, lives, timer);
+                showHideNumbers(randomString);
+            }
+        }
+
         // Function to test random and input strings and compare them
         async function testStrings() {
             if (randomString.length === inputString.length) {
                 if (randomString === inputString) {
+                    clearInterval(tmr);
                     $('.btn-custom').addClass('disabled');
                     $('.display').text('Correct!');
                     console.log('Input numbers correct!');
                     var x = await wait2Seconds();
                     inputString = '';
                     round++;
-                    score += randomString.length * 10;
+                    score += (randomString.length * 10 + timer * 2);
+                    timer = 10;
                     console.log('Round ' + (round + 1) + '.');
                     randomString = getRandomNumbers(round, difficulty);
                     updateDisplay(score, lives, timer);
                     showHideNumbers(randomString);
                 } else {
+                    clearInterval(tmr);
+                    timer = 10;
                     $('.btn-custom').addClass('disabled');
                     $('.display').text('INCORRECT!');
                     console.log('Input numbers INCORRECT!');
                     var x = await wait2Seconds();
                     inputString = '';
                     lives--;
-                    if (lives === 0) {
-                        console.log('Game over!');
-                        alert('Game over!\nYour final score is ' + score);
-                        $('.score').text('');
-                        $('.lives').text('');
-                        $('.timer').text('');
-                        $('#lnkStart').removeClass('disabled');
-                        $('.dropdown-toggle').removeClass('disabled');
-                        $('#lnkAbout').removeClass('disabled');
-                        $('.display').text('.');
-                        $('.btn-custom').off();
-                    } else {
-                        console.log('Round ' + (round + 1) + '.');
-                        randomString = getRandomNumbers(round, difficulty);
-                        updateDisplay(score, lives, timer);
-                        showHideNumbers(randomString);
-                    }
+                    checkLives();
                 }
+            } else if (timer == 0) {
+                clearInterval(tmr);
+                timer = 10;
+                $('.btn-custom').addClass('disabled');
+                $('.display').text('Time is up!');
+                console.log('Time is up!');
+                var x = await wait2Seconds();
+                inputString = '';
+                lives--;
+                checkLives();
             }
         }
 
@@ -115,6 +149,7 @@ $(document).ready(function () {
             timer = 10, // variable for the timer
             randomString = "", // variable for the random numbers to memorize
             inputString = "", // variable for entering the memorized numbers
+            tmr = 0; // variable for coundown event
             difficulty = getDifficulty($('.dropdown-item-checked').text()); // determine difficulty from the .dropdown-item-checked class
 
         // Disable menu after start (except home link)
