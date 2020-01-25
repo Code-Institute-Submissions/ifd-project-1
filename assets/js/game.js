@@ -256,10 +256,18 @@ $(document).ready(function () {
                 return false;
             }
 
-            inputString += $(this).text();
-            $('.display').text(inputString);
-            console.log('Number ' + $(this).text() + ' pressed.');
-            testStrings();
+            if ($(this).text() === 'C') {
+                inputString = '';
+                $('.display').text('.');
+                console.log('Clear button pressed.');
+            } else if ($(this).text() === '#') {
+                console.log('# button pressed.');
+            } else {
+                inputString += $(this).text();
+                $('.display').text(inputString);
+                console.log('Number ' + $(this).text() + ' pressed.');
+                testStrings();
+            }
         });
     });
 });
