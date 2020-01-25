@@ -46,7 +46,7 @@ $(document).ready(function () {
     *                       the round and difficulty variables
     ****************************************************************/
     function getRandomNumbers(round, difficulty) {
-        if (typeof(round) == 'number' || typeof(difficulty) == 'number') {  // test for arguments are numbers
+        if (typeof(round) == 'number' && typeof(difficulty) == 'number') {  // test for arguments are numbers
             var lengthOfString = 3 + Math.floor(round / difficulty),        // determines the length of the string
             randomString = '';                                              // variable to store random numbers as a string
 
