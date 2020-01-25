@@ -10,12 +10,12 @@
     <!-- Load Bootstrap stylesheet -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+
     <!-- Load custom stylesheet -->
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <!-- Load favicon -->
-    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -70,7 +70,11 @@
             </div>
 
             <div class="col-12 col-md-4">
-                <h2 class="sign">Timer:<span class="timer"></span></h2>
+                <h2 class="sign">Timer:
+                    <div class="progress">
+                        <div class="progress-bar-striped bg-success"></div>
+                    </div>
+                </h2>
             </div>
         </div>
         <!-- ./score, lives and timer display -->
@@ -109,8 +113,7 @@
                     <button class="btn btn-custom disabled">#</button>
                     <button class="btn btn-custom disabled">0</button>
                     <button class="btn btn-custom disabled">C</button>
-                </div
-                >
+                </div>
             </div>
         </div>
         <!-- ./interactive buttons -->
@@ -126,7 +129,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    
+
     <!-- Load custom script -->
     <script src="./assets/js/game.js"></script>
 </body>

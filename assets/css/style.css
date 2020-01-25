@@ -9,7 +9,7 @@
 
 /* ---------------------------------- main container -------------------------------------------- */
 .main-container {
-    background-color: #189ca1;
+    background-color: #d4cdba;
     height: 100vh;
     margin: 0;
     padding: 0;
@@ -17,7 +17,7 @@
 }
 
 .main-heading {
-    color: #00047a;
+    color: #3e5363;
     padding-top: 100px;
     padding-bottom: 60px;
     margin: auto;
@@ -26,7 +26,7 @@
 
 /* ---------------------------------- score, lives and timer display ---------------------------- */
 .sign {
-    color: #053b1e;
+    color: #f5851f;
     padding-left: 30px;
 }
 
@@ -40,9 +40,15 @@
     padding-left: 20px;
 }
 
-.timer {
-    color: #000;
-    padding-left: 20px;
+.progress {
+    display: inline-flex;
+    width: 60%;
+    height: 20px;
+    margin-left: 25px;
+}
+
+.progress-bar-striped {
+    width: 0%;
 }
 
 
@@ -61,7 +67,7 @@
 .buttons {}
 
 .btn-custom {
-    background-color: forestgreen;
+    background-color: #b5b313;
     font-weight: bold;
     border: 1px solid #555;
     font-size: 30px;

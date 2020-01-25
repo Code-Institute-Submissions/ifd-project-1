@@ -1,11 +1,11 @@
 // The script starts when the website is loaded
 $(document).ready(function () {
 
-    /*******************************************************************
-    * Purpose of the function : This is click event handler to determine
+    /*********************************************************************
+    * Purpose of the function : This is a click event handler to determine
     *                           and checkmark the chosen difficulty
     *                           level in the Difficulty dropwdown menu
-    *******************************************************************/
+    *********************************************************************/
     $('.dropdown-item').click(function () {
         $('.dropdown-item').removeClass('dropdown-item-checked');
         $(this).addClass('dropdown-item-checked');
@@ -73,7 +73,16 @@ $(document).ready(function () {
     function updateDisplay(score, lives, timer) {
         $('.score').text(score);
         $('.lives').text(lives);
-        $('.timer').text(timer);
+        var timerBar = $('.progress-bar-striped');
+
+        if (timer < 40) {
+            timerBar.removeClass('bg-success').removeClass('bg-warning').removeClass('bg-danger').addClass('bg-danger');
+        } else if (timer < 70) {
+            timerBar.removeClass('bg-success').removeClass('bg-warning').removeClass('bg-danger').addClass('bg-warning');
+        } else {
+            timerBar.removeClass('bg-success').removeClass('bg-warning').removeClass('bg-danger').addClass('bg-success');
+        }
+        timerBar.css('width', timer + '%');
     }
 
 
@@ -94,7 +103,7 @@ $(document).ready(function () {
 
 
     // Feedback to console: ready to start the game
-    console.log('DOM is ready. Click on Start to play!');
+    console.log('DOM is ready. Click Start to play!');
 
 
     /**************************************************************
@@ -111,11 +120,11 @@ $(document).ready(function () {
         *****************************************************************/
         function countdown() {
             tmr = setInterval(function () {
-                timer--;                                // decreasing the value of the timer variable
+                timer -= 10;                                // decreasing the value of the timer variable
                 updateDisplay(score, lives, timer);    
 
                 if (timer > 0) {                        // until it reaches zero
-                    console.log('Timer: ' + timer);
+                    console.log('Timer: ' + (timer / 10));
                 } else {
                     testStrings();                      
                 }
@@ -158,7 +167,6 @@ $(document).ready(function () {
                 alert('Game over!\nYour final score is ' + score);  // shows final score
                 $('.score').text('');
                 $('.lives').text('');
-                $('.timer').text('');
                 $('#lnkStart').removeClass('disabled');
                 $('.dropdown-toggle').removeClass('disabled');
                 $('#lnkAbout').removeClass('disabled');
@@ -193,15 +201,15 @@ $(document).ready(function () {
                     var x = await wait2Seconds();
                     inputString = '';
                     round++;
-                    score += (randomString.length * 10 + timer * 2);
-                    timer = 10;
+                    score += (randomString.length * 10 + timer * .2);
+                    timer = 100;
                     console.log('Round ' + (round + 1) + '.');
                     randomString = getRandomNumbers(round, difficulty);
                     updateDisplay(score, lives, timer);
                     showHideNumbers(randomString);
                 } else {
                     clearInterval(tmr);
-                    timer = 10;
+                    timer = 100;
                     $('.btn-custom').addClass('disabled');
                     $('.display').text('INCORRECT!');
                     console.log('Input numbers INCORRECT!');
@@ -212,7 +220,7 @@ $(document).ready(function () {
                 }
             } else if (timer == 0) {
                 clearInterval(tmr);
-                timer = 10;
+                timer = 100;
                 $('.btn-custom').addClass('disabled');
                 $('.display').text('Time is up!');
                 console.log('Time is up!');
@@ -227,7 +235,7 @@ $(document).ready(function () {
         var lives = 3,                                                  // variable for the number of lives
             round = 0,                                                  // variable for the number of rounds
             score = 0,                                                  // variable for the score
-            timer = 10,                                                 // variable for the timer
+            timer = 100,                                                // variable for the timer
             randomString = "",                                          // variable for the random numbers to memorize
             inputString = "",                                           // variable for entering the memorized numbers
             tmr = null;                                                 // variable for coundown event
