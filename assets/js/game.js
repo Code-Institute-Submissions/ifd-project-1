@@ -1,46 +1,89 @@
 // The script starts when the website is loaded
 $(document).ready(function () {
 
-    // Function to mark selected difficulty level
+    /*******************************************************************
+    * Purpose of the function : This is click event handler to determine
+    *                           and checkmark the chosen difficulty
+    *                           level in the Difficulty dropwdown menu
+    *******************************************************************/
     $('.dropdown-item').click(function () {
         $('.dropdown-item').removeClass('dropdown-item-checked');
         $(this).addClass('dropdown-item-checked');
         console.log('The difficulty has changed to ' + $(this).text());
     });
 
-    // Function to determine difficulty level from the .dropdown-item-checked class
-    function getDifficulty(linkText) {
-        switch (linkText) {
+
+    /******************************************************************
+    * Input Parameters : a string
+    * 
+    * Returns : a number for the difficulty level or an error message
+    *                    if the label differs from Easy, Normal or Hard
+    * 
+    * Purpose of the function : to transform the difficulty level label
+    *                           to a number for the calculations
+    *******************************************************************/
+    function getDifficulty(label) {
+        switch (label) {
             case 'Easy':
                 return 3;
             case 'Normal':
                 return 2;
             case 'Hard':
                 return 1;
+            default:
+                return 'The label is incorrect!';
         }
     }
+  
 
-    // Function to generate a random number string from the round and difficulty variables
+    /***************************************************************
+    * Input Parameters : two numbers
+    * 
+    * Returns : a string or an error message if any of the arguments
+    *           is not a number
+    * 
+    * Purpose of function : to generate a random number string from
+    *                       the round and difficulty variables
+    ****************************************************************/
     function getRandomNumbers(round, difficulty) {
-        var lengthOfString = 3 + Math.floor(round / difficulty), // determine the number of numbers using a simple equation
-            randomString = ''; // variable to store random numbers as string
+        if (typeof(round) == 'number' || typeof(difficulty) == 'number') {  // test for arguments are numbers
+            var lengthOfString = 3 + Math.floor(round / difficulty),        // determines the length of the string
+            randomString = '';                                              // variable to store random numbers as a string
 
-        for (i = 0; i < lengthOfString; i++) { // generating random numbers
-            var num = Math.floor(Math.random() * 10);
-            randomString += num.toString(); // and store them in rndStr variable
+            for (i = 0; i < lengthOfString; i++) {                          // generating random numbers
+                var num = Math.floor(Math.random() * 10);
+                randomString += num.toString();                             // and store them in randomString variable
+            }
+            console.log(lengthOfString + ' random numbers are generated.');
+            return randomString;                                            // returns the value of randomString
+        } else {
+            return 'One or both argument is not a number!';
         }
-        console.log(lengthOfString + ' random numbers are generated.');
-        return randomString; // return the value of randomString
     }
 
-    // Function to update display
+
+    /*************************************************************
+    * Input Parameters : 3 numbers
+    * 
+    * Returns : nothing
+    * 
+    * Purpose of function : to update the score, the lives and the
+    *                       timer display
+    **************************************************************/
     function updateDisplay(score, lives, timer) {
         $('.score').text(score);
         $('.lives').text(lives);
         $('.timer').text(timer);
     }
 
-    // Function to wait 2 seconds
+
+    /************************************************************
+    * Input Parameters : nothing
+    * 
+    * Returns : a promise object that resolves a 2-second timeout
+    * 
+    * Purpose of function : to act a 2-second synchronous timer
+    *************************************************************/
     function wait2Seconds() {
         return new Promise(resolve => {
             setTimeout(() => {
@@ -49,27 +92,46 @@ $(document).ready(function () {
         });
     }
 
-    // Feedback to console
+
+    // Feedback to console: ready to start the game
     console.log('DOM is ready. Click on Start to play!');
 
-    // Function to start the game
+
+    /**************************************************************
+    * Purpose of function : This is a click event to start the game
+    ***************************************************************/
     $('#lnkStart').click(function () {
 
-        // Function to activate countdown timer
+        /****************************************************************
+        * Input Parameters : nothing
+        * 
+        * Returns : nothing
+        * 
+        * Purpose of function : to start the asynchronous countdown timer
+        *****************************************************************/
         function countdown() {
             tmr = setInterval(function () {
-                timer--;
-                updateDisplay(score, lives, timer);
+                timer--;                                // decreasing the value of the timer variable
+                updateDisplay(score, lives, timer);    
 
-                if (timer > 0) {
+                if (timer > 0) {                        // until it reaches zero
                     console.log('Timer: ' + timer);
                 } else {
-                    testStrings();
+                    testStrings();                      
                 }
             }, 1000);
         }
 
-        // Function to show numbers to memorize and hide them after
+    
+        /******************************************************************
+        * Input Parameters : the random number string
+        * 
+        * Returns : nothing
+        * 
+        * Purpose of function : to show the random number string for
+        *                       2 senconds, hide it and start the countdown
+        *                       timer
+        *******************************************************************/
         async function showHideNumbers(string) {
             $('.display').text(string).show();
             var x = await wait2Seconds();
@@ -80,28 +142,47 @@ $(document).ready(function () {
             countdown();
         }
 
+
         // Function to check the number of lives
+        /**************************************************************
+        * Input Parameters : nothing
+        * 
+        * Returns : nothing
+        * 
+        * Purpose of function : to check the number of lives and decide
+        *                       to countinue or stop the game
+        ***************************************************************/
         function checkLives() {
-            if (lives === 0) {
-                console.log('Game over!');
-                alert('Game over!\nYour final score is ' + score);
+            if (lives === 0) {                                      // if no more lives left
+                console.log('Game over!');                          // game is over
+                alert('Game over!\nYour final score is ' + score);  // shows final score
                 $('.score').text('');
                 $('.lives').text('');
                 $('.timer').text('');
                 $('#lnkStart').removeClass('disabled');
                 $('.dropdown-toggle').removeClass('disabled');
                 $('#lnkAbout').removeClass('disabled');
-                $('.display').text('.');
-                $('.btn-custom').off();
+                $('.display').text('.');                            // restores display and menu items
+                $('.btn-custom').off();                             // removes the click event for the buttons
             } else {
-                console.log('Round ' + (round + 1) + '.');
+                console.log('Round ' + (round + 1) + '.');          // prepares the next round
                 randomString = getRandomNumbers(round, difficulty);
                 updateDisplay(score, lives, timer);
                 showHideNumbers(randomString);
             }
         }
 
-        // Function to test random and input strings and compare them
+
+        /*********************************************************************
+        * Input Parameters : nothing
+        * 
+        * Returns : nothing
+        * 
+        * Purpose of function : to compare the random and the input strings.
+        *                       if the strings are the same, calculate score.
+        *                       if the strings are not the same or time is up,
+        *                       decrease the number of lives.
+        **********************************************************************/
         async function testStrings() {
             if (randomString.length === inputString.length) {
                 if (randomString === inputString) {
@@ -143,14 +224,14 @@ $(document).ready(function () {
         }
 
         // Initialize the variables and the game 
-        var lives = 3, // variable for the number of lives
-            round = 0, // variable for the number of rounds
-            score = 0, // variable for the score
-            timer = 10, // variable for the timer
-            randomString = "", // variable for the random numbers to memorize
-            inputString = "", // variable for entering the memorized numbers
-            tmr = 0; // variable for coundown event
-            difficulty = getDifficulty($('.dropdown-item-checked').text()); // determine difficulty from the .dropdown-item-checked class
+        var lives = 3,                                                  // variable for the number of lives
+            round = 0,                                                  // variable for the number of rounds
+            score = 0,                                                  // variable for the score
+            timer = 10,                                                 // variable for the timer
+            randomString = "",                                          // variable for the random numbers to memorize
+            inputString = "",                                           // variable for entering the memorized numbers
+            tmr = null;                                                 // variable for coundown event
+        difficulty = getDifficulty($('.dropdown-item-checked').text()); // determine difficulty from the .dropdown-item-checked class
 
         // Disable menu after start (except home link)
         $('#lnkStart').addClass('disabled');
@@ -164,7 +245,10 @@ $(document).ready(function () {
         updateDisplay(score, lives, timer);
         showHideNumbers(randomString);
 
-        // Functions to click number buttons
+        /*************************************************************************
+        * Purpose of function : This is a click event handler to enter the numbers
+        *                       using the buttons
+        **************************************************************************/
         $('.btn-custom').click(function () {
             // No input in case if buttons are disabled
             if ($(this).hasClass('disabled')) {
