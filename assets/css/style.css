@@ -48,9 +48,9 @@
 
 /* ---------------------------------- display for the numbers ----------------------------------- */
 .display-numbers {
-    font-size: 50px;
+    font-size: 40px;
     letter-spacing: 20px;
-    padding-top: 50px;
+    padding-top: 40px;
     padding-bottom: 50px;
 }
 
@@ -64,9 +64,9 @@
     background-color: forestgreen;
     font-weight: bold;
     border: 1px solid #555;
-    font-size: 40px;
-    padding: 20px;
-    margin: 5px;
+    font-size: 30px;
+    padding: 10px 30px 10px 30px;
+    margin: 2px;
 }
 
 .buttons .disabled {
@@ -79,12 +79,11 @@
     .main-heading {
         padding-top: 60px;
         padding-bottom: 20px;
+        font-size: 20px;
     }
 
     .btn-custom {
-        font-size: 15px;
-        padding: 10px;
-        margin: 2px;
+        font-size: 20px;
     }
 
     .sign {
