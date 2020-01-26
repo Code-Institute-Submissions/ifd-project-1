@@ -48,7 +48,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" id="lnkAbout" href="#" role="button">About</a>
+                    <a class="nav-link" id="lnkAbout" href="#" role="button" data-toggle="modal"
+                        data-target="#aboutModal">About</a>
                 </li>
             </ul>
         </div>
@@ -119,6 +120,28 @@
         <!-- ./interactive buttons -->
     </section>
     <!-- ./main container -->
+
+    <!-- About modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="aboutModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">About the game</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Rules:</strong> Numbers pop up for 2 seconds to memorize. Enter the same number to get the score
+                         and continue to the next round. You have 10 seconds to enter the correct number. Also, 3 opportunities
+                          to make a mistake. The length of number increases according to the difficulty level.</p>
+                    <p><strong>Score:</strong> You get 10 points for each digit and 2 points for each remaining seconds.</p>
+                    <p>C button clears the entered numbers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./About modal -->
 
     <!-- Load dependency scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
