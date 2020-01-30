@@ -1,3 +1,64 @@
+/******************************************************************
+* Input Parameters : a string
+* 
+* Returns : a number for the difficulty level or an error message
+*                    if the label differs from Easy, Normal or Hard
+* 
+* Purpose of the function : to transform the difficulty level label
+*                           to a number for the calculations
+*******************************************************************/
+function getDifficulty(label) {
+    if (typeof(label) != 'undefined'){
+        switch (label) {
+            case 'Easy':
+                return 3;
+            case 'Normal':
+                return 2;
+            case 'Hard':
+                return 1;
+            default:
+                return 'The label is incorrect!';
+        }
+    } else {
+        return 'Argument is undefined!';
+    }
+}
+
+
+/***************************************************************
+* Input Parameters : two numbers
+* 
+* Returns : a string or an error message if any of the arguments
+*           is not a number
+* 
+* Purpose of function : to generate a random number string from
+*                       the round and difficulty variables
+****************************************************************/
+function getRandomNumbers(round, difficulty) {
+    if (typeof(round) != 'undefined' && typeof(difficulty) != 'undefined') {    // test for arguments are undefined
+        if (typeof(round) == 'number' && typeof(difficulty) == 'number') {      // test for arguments are numbers
+            if (round >= 0 && difficulty >= 0) {                                // test for arguments are negative
+                var lengthOfString = 3 + Math.floor(round / difficulty),        // determines the length of the string
+                randomString = '';                                              // variable to store random numbers as a string
+    
+                for (i = 0; i < lengthOfString; i++) {                          // generating random numbers
+                    var num = Math.floor(Math.random() * 10);
+                    randomString += num.toString();                             // and store them in randomString variable
+                }
+                console.log(lengthOfString + ' random numbers are generated.');
+                return randomString;                                            // returns the value of randomString
+            } else {
+                return 'One or both argument is a negative number!';
+            }   
+        } else {
+            return 'One or both argument is not a number!';
+        }
+    } else {
+        return 'One or both argument is undefined!';
+    }
+}
+
+
 // The script starts when the website is loaded
 $(document).ready(function () {
 
@@ -11,55 +72,6 @@ $(document).ready(function () {
         $(this).addClass('dropdown-item-checked');
         console.log('The difficulty has changed to ' + $(this).text());
     });
-
-
-    /******************************************************************
-    * Input Parameters : a string
-    * 
-    * Returns : a number for the difficulty level or an error message
-    *                    if the label differs from Easy, Normal or Hard
-    * 
-    * Purpose of the function : to transform the difficulty level label
-    *                           to a number for the calculations
-    *******************************************************************/
-    function getDifficulty(label) {
-        switch (label) {
-            case 'Easy':
-                return 3;
-            case 'Normal':
-                return 2;
-            case 'Hard':
-                return 1;
-            default:
-                return 'The label is incorrect!';
-        }
-    }
-  
-
-    /***************************************************************
-    * Input Parameters : two numbers
-    * 
-    * Returns : a string or an error message if any of the arguments
-    *           is not a number
-    * 
-    * Purpose of function : to generate a random number string from
-    *                       the round and difficulty variables
-    ****************************************************************/
-    function getRandomNumbers(round, difficulty) {
-        if (typeof(round) == 'number' && typeof(difficulty) == 'number') {  // test for arguments are numbers
-            var lengthOfString = 3 + Math.floor(round / difficulty),        // determines the length of the string
-            randomString = '';                                              // variable to store random numbers as a string
-
-            for (i = 0; i < lengthOfString; i++) {                          // generating random numbers
-                var num = Math.floor(Math.random() * 10);
-                randomString += num.toString();                             // and store them in randomString variable
-            }
-            console.log(lengthOfString + ' random numbers are generated.');
-            return randomString;                                            // returns the value of randomString
-        } else {
-            return 'One or both argument is not a number!';
-        }
-    }
 
 
     /*************************************************************
