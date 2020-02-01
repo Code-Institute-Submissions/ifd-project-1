@@ -154,7 +154,12 @@ $(document).ready(function () {
         *                       timer
         *******************************************************************/
         async function showHideNumbers(string) {
-            $('.display').text(string).show();
+            if (round == 0 && lives == 3) {
+                // Get ready
+                $('.display').text('Get ready!').addClass('col-correct').show();
+                var x = await wait2Seconds();
+            }
+            $('.display').removeClass('col-correct').removeClass('col-timeup').removeClass('col-incorrect').text(string).show();
             var x = await wait2Seconds();
             console.log('Numbers displayed for 2 seconds.');
             $('.display').text('.');
@@ -174,18 +179,17 @@ $(document).ready(function () {
         *                       to countinue or stop the game
         ***************************************************************/
         function checkLives() {
-            if (lives === 0) {                                      // if no more lives left
-                console.log('Game over!');                          // game is over
-                alert('Game over!\nYour final score is ' + score);  // shows final score
-                $('.score').text('');
-                $('.lives').text('');
+            if (lives == 0) {                                       // if no more lives left
+                updateDisplay('','', 0);                            // resets display and menu items
                 $('#lnkStart').removeClass('disabled');
                 $('.dropdown-toggle').removeClass('disabled');
                 $('#lnkAbout').removeClass('disabled');
-                $('.display').text('.');                            // restores display and menu items
+                $('.display').removeClass('col-correct').removeClass('col-timeup').removeClass('col-incorrect').text('.');
                 $('.btn-custom').off();                             // removes the click event for the buttons
+                console.log('Game over!');                          // game is over
+                alert('Game over!\nYour final score is ' + score);  // shows final score
             } else {
-                console.log('Round ' + (round + 1) + '.');          // prepares the next round
+                console.log('\nRound ' + (round + 1) + '.');          // prepares the next round
                 randomString = getRandomNumbers(round, difficulty);
                 updateDisplay(score, lives, timer);
                 showHideNumbers(randomString);
@@ -208,14 +212,14 @@ $(document).ready(function () {
                 if (randomString === inputString) {
                     clearInterval(tmr);
                     $('.btn-custom').addClass('disabled');
-                    $('.display').text('Correct!');
+                    $('.display').addClass('col-correct').text('Correct!');
                     console.log('Input numbers correct!');
                     var x = await wait2Seconds();
                     inputString = '';
                     round++;
                     score += (randomString.length * 10 + timer * .2);
                     timer = 100;
-                    console.log('Round ' + (round + 1) + '.');
+                    console.log('\nRound ' + (round + 1) + '.');
                     randomString = getRandomNumbers(round, difficulty);
                     updateDisplay(score, lives, timer);
                     showHideNumbers(randomString);
@@ -223,7 +227,7 @@ $(document).ready(function () {
                     clearInterval(tmr);
                     timer = 100;
                     $('.btn-custom').addClass('disabled');
-                    $('.display').text('INCORRECT!');
+                    $('.display').addClass('col-incorrect').text('INCORRECT!');
                     console.log('Input numbers INCORRECT!');
                     var x = await wait2Seconds();
                     inputString = '';
@@ -234,7 +238,7 @@ $(document).ready(function () {
                 clearInterval(tmr);
                 timer = 100;
                 $('.btn-custom').addClass('disabled');
-                $('.display').text('Time is up!');
+                $('.display').addClass('col-timeup').text('Time is up!');
                 console.log('Time is up!');
                 var x = await wait2Seconds();
                 inputString = '';
@@ -260,8 +264,8 @@ $(document).ready(function () {
         console.log('The game has been initialized.');
 
         // Get the random numbers, show them for 2 seconds and hide them again
+        console.log('\nRound ' + (round + 1) + '.');
         randomString = getRandomNumbers(round, difficulty);
-        console.log('Round ' + (round + 1) + '.');
         updateDisplay(score, lives, timer);
         showHideNumbers(randomString);
 

@@ -62,6 +62,18 @@
 
 .display {}
 
+.col-correct {
+    color: green;
+}
+
+.col-timeup {
+    color: orangered;
+}
+
+.col-incorrect {
+    color: red;
+}
+
 
 /* ---------------------------------- interactive buttons --------------------------------------- */
 .buttons {}
