@@ -17,10 +17,10 @@ function getDifficulty(label) {
             case 'Hard':
                 return 1;
             default:
-                return 'The label is incorrect!';
+                throw new Error('The label is incorrect!');
         }
     } else {
-        return 'Argument is undefined!';
+        throw new Error('Argument is undefined!');
     }
 }
 
@@ -38,23 +38,23 @@ function getRandomNumbers(round, difficulty) {
     if (typeof(round) != 'undefined' && typeof(difficulty) != 'undefined') {    // test for arguments are undefined
         if (typeof(round) == 'number' && typeof(difficulty) == 'number') {      // test for arguments are numbers
             if (round >= 0 && difficulty >= 0) {                                // test for arguments are negative
-                var lengthOfString = 3 + Math.floor(round / difficulty),        // determines the length of the string
+                let lengthOfString = 3 + Math.floor(round / difficulty),        // determines the length of the string
                 randomString = '';                                              // variable to store random numbers as a string
     
                 for (i = 0; i < lengthOfString; i++) {                          // generating random numbers
-                    var num = Math.floor(Math.random() * 10);
+                    let num = Math.floor(Math.random() * 10);
                     randomString += num.toString();                             // and store them in randomString variable
                 }
                 console.log(lengthOfString + ' random numbers are generated.');
                 return randomString;                                            // returns the value of randomString
             } else {
-                return 'One or both argument is a negative number!';
+                throw new Error('One or both argument is a negative number!');
             }   
         } else {
-            return 'One or both argument is not a number!';
+            throw new Error('One or both argument is not a number!');
         }
     } else {
-        return 'One or both argument is undefined!';
+        throw new Error('One or both argument is undefined!');
     }
 }
 
@@ -85,7 +85,7 @@ $(document).ready(function () {
     function updateDisplay(score, lives, timer) {
         $('.score').text(score);
         $('.lives').text(lives);
-        var timerBar = $('.progress-bar-striped');
+        let timerBar = $('.progress-bar-striped');
 
         if (timer < 40) {
             timerBar.removeClass('bg-success').removeClass('bg-warning').removeClass('bg-danger').addClass('bg-danger');
@@ -157,10 +157,10 @@ $(document).ready(function () {
             if (round == 0 && lives == 3) {
                 // Get ready
                 $('.display').text('Get ready!').addClass('col-correct').show();
-                var x = await wait2Seconds();
+                let x = await wait2Seconds();
             }
             $('.display').removeClass('col-correct').removeClass('col-timeup').removeClass('col-incorrect').text(string).show();
-            var x = await wait2Seconds();
+            let x = await wait2Seconds();
             console.log('Numbers displayed for 2 seconds.');
             $('.display').text('.');
             $('.btn-custom').removeClass('disabled');
@@ -214,7 +214,7 @@ $(document).ready(function () {
                     $('.btn-custom').addClass('disabled');
                     $('.display').addClass('col-correct').text('Correct!');
                     console.log('Input numbers correct!');
-                    var x = await wait2Seconds();
+                    let x = await wait2Seconds();
                     inputString = '';
                     round++;
                     score += (randomString.length * 10 + timer * .2);
@@ -229,7 +229,7 @@ $(document).ready(function () {
                     $('.btn-custom').addClass('disabled');
                     $('.display').addClass('col-incorrect').text('INCORRECT!');
                     console.log('Input numbers INCORRECT!');
-                    var x = await wait2Seconds();
+                    let x = await wait2Seconds();
                     inputString = '';
                     lives--;
                     checkLives();
@@ -240,7 +240,7 @@ $(document).ready(function () {
                 $('.btn-custom').addClass('disabled');
                 $('.display').addClass('col-timeup').text('Time is up!');
                 console.log('Time is up!');
-                var x = await wait2Seconds();
+                let x = await wait2Seconds();
                 inputString = '';
                 lives--;
                 checkLives();

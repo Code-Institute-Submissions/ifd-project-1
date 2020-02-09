@@ -14,31 +14,45 @@ describe('getRandomNumber() function', function() {
     });
 
     describe('Negative number as an argument', function() {
-        it('should return "One or both argument is a negative number!"', function() {
-            expect(getRandomNumbers(-1, 3)).toBe('One or both argument is a negative number!');
-            expect(getRandomNumbers(0, -3)).toBe('One or both argument is a negative number!');
+        it('should throw error "One or both argument is a negative number!"', function() {
+            expect(function() {
+                getRandomNumbers(-1, 3);
+            }).toThrowError('One or both argument is a negative number!');
+            expect(function() {
+                getRandomNumbers(0, -3);
+            }).toThrowError('One or both argument is a negative number!');
         });
     });
 
     describe('String as an argument', function() {
-        it('should return "One or both argument is not a number!"', function() {
-            expect(getRandomNumbers("a", 3)).toBe('One or both argument is not a number!');
-            expect(getRandomNumbers(0, "a")).toBe('One or both argument is not a number!');
+        it('should throw error "One or both argument is not a number!"', function() {
+            expect(function() {
+                getRandomNumbers("a", 3);
+            }).toThrowError('One or both argument is not a number!');
+            expect(function() {
+                getRandomNumbers(0, "a");
+            }).toThrowError('One or both argument is not a number!');
         });
     });
 
     describe('Undefined as an argument', function() {
-        it('should return "One or both argument is undefined!"', function() {
-            expect(getRandomNumbers(undefined, 3)).toBe('One or both argument is undefined!');
-            expect(getRandomNumbers(0, undefined)).toBe('One or both argument is undefined!');
+        it('should throw error "One or both argument is undefined!"', function() {
+            expect(function() {
+                getRandomNumbers(undefined, 3);
+            }).toThrowError('One or both argument is undefined!');
+            expect(function() {
+                getRandomNumbers(0, undefined);
+            }).toThrowError('One or both argument is undefined!');
         });
     });
 });
 
 describe('getDifficulty() function', function() {
     describe('Undefined argument', function() {
-        it('should return "Argument is undefined!"', function() {
-            expect(getDifficulty(undefined)).toBe('Argument is undefined!');
+        it('should throw error "Argument is undefined!"', function() {
+            expect(function () {
+                getDifficulty(undefined);
+            }).toThrowError('Argument is undefined!');
         });
     });
 
@@ -51,11 +65,19 @@ describe('getDifficulty() function', function() {
     });
 
     describe('Anything else but "Easy", "Normal" or "Hard" as an argument', function() {
-        it('should return "The label is incorrect!"', function() {
-            expect(getDifficulty('easy')).toBe('The label is incorrect!');
-            expect(getDifficulty('Novice')).toBe('The label is incorrect!');
-            expect(getDifficulty('1')).toBe('The label is incorrect!');
-            expect(getDifficulty(1)).toBe('The label is incorrect!');
+        it('should throw error "The label is incorrect!"', function() {
+            expect(function() {
+                getDifficulty('easy');
+            }).toThrowError('The label is incorrect!');
+            expect(function() {
+                getDifficulty('Novice');
+            }).toThrowError('The label is incorrect!');
+            expect(function() {
+                getDifficulty('1');
+            }).toThrowError('The label is incorrect!');
+            expect(function() {
+                getDifficulty(1);
+            }).toThrowError('The label is incorrect!');
         });
     });
 });
