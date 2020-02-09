@@ -101,7 +101,8 @@
     }
 
     .btn-custom {
-        font-size: 20px;
+        font-size: 18px;
+        padding: 5px 30px 5px 30px;
     }
 
     .sign {
