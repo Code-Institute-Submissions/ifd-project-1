@@ -54,7 +54,7 @@
 
 /* ---------------------------------- display for the numbers ----------------------------------- */
 .display-numbers {
-    font-size: 40px;
+    font-size: 30px;
     letter-spacing: 20px;
     padding-top: 40px;
     padding-bottom: 50px;
@@ -82,7 +82,7 @@
     background-color: #b5b313;
     font-weight: bold;
     border: 1px solid #555;
-    font-size: 30px;
+    font-size: 20px;
     padding: 10px 30px 10px 30px;
     margin: 2px;
 }
