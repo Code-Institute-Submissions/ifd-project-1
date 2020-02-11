@@ -4,8 +4,8 @@ The purpose of this website is to play a simple memory game. Memory games help t
 ## UX
 The website has a simple UX design. It has a navbar, two displays (a smaller one for the score, the lives and the timer, and a larger one for the numbers and the system feedback), and a dial pad to enter the numbers. The difficulty level varies from easy to hard and it can be changed on the navigation bar. Also, a start "button" and a modal with the game information was placed on the navigation bar. The responsiveness of the website was maintained to fit the game on every device from mobile phones to desktop computers. The mobile version is working in portrait mode only.
 
-The original wireframe can be viewed [here](https://github.com/faithy80/ifd-project/design/wireframe1.jpg).
-The modified wireframe can be viewed [here](https://github.com/faithy80/ifd-project/design/wireframe2.jpg).
+The original wireframe can be viewed [here](https://faithy80.github.io/ifd-project/design/wireframe1.jpg).
+The modified wireframe can be viewed [here](https://faithy80.github.io/ifd-project/design/wireframe2.jpg).
 
 ## Demo
 The game is deployed [here](https://faithy80.github.io/ifd-project/).
